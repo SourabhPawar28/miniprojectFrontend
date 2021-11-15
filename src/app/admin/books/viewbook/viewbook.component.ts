@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Book } from 'src/app/model/Book';
-import { HttpClientService } from 'src/app/service/http-client.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Book } from '../../../model/Book';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClientService } from '../../../service/http-client.service';
 
 @Component({
   selector: 'app-viewbook',
@@ -12,23 +12,22 @@ export class ViewbookComponent implements OnInit {
 
   @Input()
   book: Book;
-
   @Output()
   bookDeletedEvent = new EventEmitter();
-  
+
   constructor(private httpClientService: HttpClientService, private router: Router
-    ) { }
-  
-    ngOnInit() {
-    }
-  
-    deleteBook() {
-      this.httpClientService.deleteBook(this.book.id).subscribe(
-        (book) => {
-          this.bookDeletedEvent.emit();
-          this.router.navigate(['admin', 'books']);
-        }
-      );
-    }
+  ) { }
+
+  ngOnInit() {
+  }
+
+  deleteBook() {
+    this.httpClientService.deleteBook(this.book.id).subscribe(
+      (book) => {
+        this.bookDeletedEvent.emit();
+        this.router.navigate(['admin', 'books']);
+      }
+    );
+  }
 
 }
