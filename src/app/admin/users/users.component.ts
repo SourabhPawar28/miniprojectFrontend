@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClientService } from 'src/app/service/http-client.service';
 import { User } from '../../model/User';
+import { HttpClientService } from '../../service/http-client.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-users',
@@ -11,32 +12,53 @@ import { User } from '../../model/User';
 export class UsersComponent implements OnInit {
 
   users: Array<User>;
-  action: string;
   selectedUser: User;
+  action: string;
 
-  constructor(private httpClientService: HttpClientService,private router: Router,
+  constructor(private httpClientService: HttpClientService,
+    private router: Router,
     private activatedRoute: ActivatedRoute) { }
+  ngOnInit() {
+    this.refreshData();
+  }
 
-    ngOnInit() {
-      this.refreshData();
-     }
-   
-     refreshData() {
-       this.httpClientService.getUsers().subscribe(
-         response => this.handleSuccessfulResponse(response),
-       );
-   
-       this.activatedRoute.queryParams.subscribe(
-         (params) => {
-           this.action = params['action']
-         }
-       );
-     }
-    
-  
+  refreshData() {
+    this.httpClientService.getUsers().subscribe(
+      response => this.handleSuccessfulResponse(response),
+    );
+
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        this.action = params['action'];
+        const selectedUserId = params['id'];
+        if (selectedUserId) {
+          const selectedUser = this.users.find(user => user.id === +selectedUserId);
+          if (selectedUser){
+            this.selectedUser=selectedUser;
+          }
+        }
+      }
+    );
+  }
 
   handleSuccessfulResponse(response) {
     this.users = response;
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        this.action = params['action'];
+        const selectedUserId = params['id'];
+        if (selectedUserId) {
+          const selectedUser = this.users.find(user => user.id === +selectedUserId);
+          if (selectedUser){
+            this.selectedUser=selectedUser;
+          }
+        }
+      }
+    );
+  }
+
+  viewUser(id: number) {
+    this.router.navigate(['admin','users'], {queryParams : {id, action: 'view'}});
   }
 
   addUser() {
