@@ -12,7 +12,7 @@ export class BooksComponent implements OnInit {
 
   books: Array<Book>;
   booksRecieved: Array<Book>;
-  selectedBook: Book;
+  selectedBook: any;
   action: string;
 
   constructor(private httpClientService: HttpClientService,
@@ -33,11 +33,11 @@ export class BooksComponent implements OnInit {
         this.action = params['action'];
 	// get the parameter id. this will be the id of the book whose details 
 	// are to be displayed when action is view.
-	const id = params['id'];
+	      const id = params['id'];
 	// if id exists, convert it to integer and then retrive the book from
 	// the books array
         if (id) {
-          const selectedBook = this.books.find(book => {
+          this.selectedBook = this.books.find(book => {
             return book.id === +id;
           });
         }
