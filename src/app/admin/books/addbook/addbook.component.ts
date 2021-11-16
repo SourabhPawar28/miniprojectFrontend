@@ -42,8 +42,8 @@ export class AddbookComponent implements OnInit {
   }
 
   saveBook() {
-
-    const uploadData = new FormData();
+    if (this.book.id == null){
+      const uploadData = new FormData();
     uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
     this.selectedFile.imageName = this.selectedFile.name;
 
@@ -62,5 +62,15 @@ export class AddbookComponent implements OnInit {
         }
       }
       );
+    }
+    else {
+      this.httpClientService.updateBook(this.book).subscribe(
+        (book) => {
+          this.bookAddedEvent.emit();
+          this.router.navigate(['admin', 'books']);
+        }
+      );
+    }
+    
   }
 }
