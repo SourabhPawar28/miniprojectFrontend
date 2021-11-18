@@ -8,19 +8,15 @@ import { map } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor() { }
 
   authenticate(username, password) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<User>('http://localhost:8080/users/validateLogin',{headers}).pipe(
-     map(
-       userData => {
-        sessionStorage.setItem('username',username);
-        return userData;
-       }
-     )
-
-    );
+    if (username === "javainuse" && password === "password") {
+      sessionStorage.setItem('username', username)
+      return true;
+    } else {
+      return false;
+    }
   }
 
   isUserLoggedIn() {
