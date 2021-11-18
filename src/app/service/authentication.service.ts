@@ -12,7 +12,7 @@ export class AuthenticationService {
 
   authenticate(username, password) {
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<User>('http://localhost:8080/employees/validateLogin',{headers}).pipe(
+    return this.httpClient.get<User>('http://localhost:8080/users/validateLogin',{headers}).pipe(
      map(
        userData => {
         sessionStorage.setItem('username',username);
