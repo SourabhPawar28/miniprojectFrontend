@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/User';
 import { Book } from '../model/Book';
 
@@ -13,15 +13,24 @@ export class HttpClientService {
   }
 
   getUsers() {
-    return this.httpClient.get<User[]>('http://localhost:8080/users/get');
+    let name ='user'
+    let password ='user'
+    const headers = new HttpHeaders({Authorization: 'Basic' + btoa(name + ':' + password)})
+    return this.httpClient.get<User[]>('http://localhost:8080/users/get',{headers});
   }
 
   addUser(newUser: User) {
-    return this.httpClient.post<User>('http://localhost:8080/users/add', newUser);
+    let name ='user'
+    let password ='user'
+    const headers = new HttpHeaders({Authorization: 'Basic' + btoa(name + ':' + password)})
+    return this.httpClient.post<User>('http://localhost:8080/users/add', newUser,{headers});
   }
 
   deleteUser(id) {
-    return this.httpClient.delete<User>('http://localhost:8080/users/' + id);
+    let name ='user'
+    let password ='user'
+    const headers = new HttpHeaders({Authorization: 'Basic' + btoa(name + ':' + password)})
+    return this.httpClient.delete<User>('http://localhost:8080/users/' + id,{headers});
   }
 
   getBooks() {
