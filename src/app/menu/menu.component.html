@@ -6,9 +6,7 @@
             <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
             <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
             <li><a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/shop"  >Shop</a></li>
-            <li><a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/admin/users"  >Users</a></li>
-            <li><a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/admin/books"  >Books</a></li>
-            <!-- <li *ngIf="loginService.isUserLoggedIn()" class="nav-item dropdown">
+            <li *ngIf="loginService.isUserLoggedIn()" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Admin
@@ -17,7 +15,7 @@
                     <a routerLink="/admin/users" class="dropdown-item">Users</a>
                     <a routerLink="/admin/books" class="dropdown-item">Books</a>
                 </div>
-            </li> -->
+            </li>
         </ul>
     </nav>
 </header>
