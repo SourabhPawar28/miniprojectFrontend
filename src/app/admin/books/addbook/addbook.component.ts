@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Book } from '../../../model/Book';
 import { HttpClientService } from '../../../service/http-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class AddbookComponent implements OnInit {
   
   private selectedFile;
   imgURL: any;
+  
 
   constructor(private httpClientService: HttpClientService,
     private activedRoute: ActivatedRoute,
@@ -41,36 +42,12 @@ export class AddbookComponent implements OnInit {
 
   }
 
-  saveBook() {
-    if (this.book.id == null){
-      const uploadData = new FormData();
-    uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.selectedFile.imageName = this.selectedFile.name;
-
-    this.httpClient.post('http://localhost:8080/books/upload', uploadData, { observe: 'response' })
-      .subscribe((response) => {
-        if (response.status === 200) {
-          this.httpClientService.addBook(this.book).subscribe(
-            (book) => {
-              this.bookAddedEvent.emit();
-              this.router.navigate(['admin', 'books']);
-            }
-          );
-          console.log('Image uploaded successfully');
-        } else {
-          console.log('Image not uploaded successfully');
-        }
+  saveBook(){
+    this.httpClientService.addBook(this.book).subscribe(
+      (book) => {
+        this.bookAddedEvent.emit();
+        this.router.navigate(['admin', 'books']);
       }
-      );
-    }
-    else {
-      this.httpClientService.updateBook(this.book).subscribe(
-        (book) => {
-          this.bookAddedEvent.emit();
-          this.router.navigate(['admin', 'books']);
-        }
-      );
-    }
-    
+    );
   }
 }
