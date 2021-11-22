@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
         <div><a  style= "color: black; font-size:xx-large; font-weight: bold">Book Store</a></div>
 
-        <ul class="navbar-nav offset-md-1">
+        <ul class="navbar-nav">
             <li><a style= "color: black" *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
             <li><a style= "color: black" *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/shop"  >Shop</a></li>
             <li style= "color: black" *ngIf="loginService.isUserLoggedIn()" class="nav-item dropdown">
