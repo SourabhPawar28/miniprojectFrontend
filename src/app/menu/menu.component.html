@@ -1,13 +1,12 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div><a style= "color: white;">Book Store</a></div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-info">
+        <div><a  style= "color: black; font-size:xx-large; font-weight: bold">Book Store</a></div>
 
-        <ul class="navbar-nav">
-            <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
-            <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-            <li><a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/shop"  >Shop</a></li>
-            <li *ngIf="loginService.isUserLoggedIn()" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <ul class="navbar-nav offset-md-1">
+            <li><a style= "color: black" *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+            <li><a style= "color: black" *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/shop"  >Shop</a></li>
+            <li style= "color: black" *ngIf="loginService.isUserLoggedIn()" class="nav-item dropdown">
+                <a style= "color: black" *ngIf="isAdmin" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Admin
                 </a>
@@ -16,6 +15,7 @@
                     <a routerLink="/admin/books" class="dropdown-item">Books</a>
                 </div>
             </li>
+            <li><a style= "color: black" *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
         </ul>
     </nav>
 </header>

@@ -3,7 +3,7 @@
         <h1>Books</h1>
     </div>
     <div class="col-md-10 custom-products-cart-container">
-        <div class="offset-md-8">
+        <div class="offset-md-7">
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown">
@@ -18,13 +18,12 @@
                         <li *ngFor="let item of cartBooks">
                             <div class="item product-cart-item row">
                                 <div class="col-md-8" *ngIf="item">{{item.name}}</div>
-                                <div class="col-md-4" *ngIf="item"><strong>${{item.price}}</strong></div>
+                                <div class="col-md-4" *ngIf="item"><strong>Rs{{item.price}}</strong></div>
                             </div>
                         </li>
                         <hr>
-                        <br>
                         <li *ngIf="cartBooks.length > 0">
-                            <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a></li>
+                            <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()" ng-click="reset(addCart)">Empty Cart</a></li>
                     </ul>
                 </li>
             </ul>
@@ -43,12 +42,12 @@
           margin-top: 10px">
             <div class="book-desc-container row">
                 <div>
-                    <p style="margin-left: 60px"><strong>{{book.name}}: ${{book.price}}</strong></p>
+                    <p style="margin-left: 60px" ><strong>{{book.name}}: Rs {{book.price}}</strong></p>
                     <p style="margin-left: 60px">{{book.author}}</p>
                 </div>
                 <div class="offset-md-4 col-md-4">
-                    <button class="btn btn-primary btn-sm" (click)="addToCart(book.id)"
-                        [disabled]="book.isAdded===true">Add To Cart</button>
+                    <button id="addCart" class="btn btn-primary btn-sm" (click)="addToCart(book.id)"
+                        >Add To Cart</button>
                 </div>
             </div>
 

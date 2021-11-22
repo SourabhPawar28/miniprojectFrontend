@@ -85,6 +85,7 @@ export class ShopbookComponent implements OnInit {
   emptyCart() {
     this.cartBooks = [];
     localStorage.clear();
+    
   }
 
 }

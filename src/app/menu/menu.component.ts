@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
+import { HttpClientService } from '../service/http-client.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +9,20 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public loginService:AuthenticationService) { }
+  isAdmin : boolean = false;
+  type : any;
+
+  constructor(private httpClientService: HttpClientService,
+    public loginService:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.isAdminFn();
   }
 
+  isAdminFn(){
+    this.type = this.httpClientService.getRole();
+    if(this.type ==='admin'){
+      this.isAdmin = true;
+    }
+  }
 }

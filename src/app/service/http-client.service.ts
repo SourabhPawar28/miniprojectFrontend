@@ -43,4 +43,10 @@ export class HttpClientService {
   updateBook(updatedBook: Book) {
     return this.httpClient.put<Book>('http://localhost:8080/books/update', updatedBook);
   }
+  
+  getRole(){
+    let user = sessionStorage.getItem('username')
+    //return this.httpClient.get<User>('http://localhost:8080/users/role')
+    return 'admin'
+  }
 }
